@@ -1,322 +1,247 @@
 <!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>이서연 포트폴리오</title>
-  <meta name="description" content="기획자 이서연의 인터랙티브 포트폴리오">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>이서연 | 기획자 포트폴리오</title>
+<style>
+  :root{--bg:#f6f6f6;--ink:#0f172a;--muted:#475569;--accent:#5B5FC7;--subaccent:#D4D7FF;--shadow:0 6px 20px rgba(0,0,0,0.08)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Pretendard','Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden}
+
+  /* Header */
+  header{padding:120px 20px 100px;text-align:center;position:relative;overflow:hidden}
+  header::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:2px;height:100px;border-right:2px dotted #bbb}
+  header .slogan{font-size:1.1rem;color:var(--muted);margin-bottom:30px}
+  header .main-title{font-size:3rem;font-weight:900;line-height:1.4;letter-spacing:-.5px}
+  header .main-title span{display:block}
+  header .contact{margin-top:60px;font-size:1rem;line-height:1.8;color:#222}
+
+  /* Skills dots */
+  #skills{max-width:1100px;margin:80px auto 40px;padding:0 20px}
+  #skills .intro{font-size:1.05rem;color:var(--muted);text-align:center;margin-bottom:28px}
+  .skills-dots{display:flex;align-items:center;justify-content:center;gap:28px;flex-wrap:wrap;position:relative}
+  .skills-dots::before{content:'';position:absolute;top:50%;left:5%;right:5%;border-top:2px dotted #bdbdbd;transform:translateY(-50%);z-index:0}
+  .dot{position:relative;z-index:1;width:220px;height:220px;border-radius:50%;background:#101010;color:#fff;display:flex;align-items:center;justify-content:center;text-align:center;padding:22px;line-height:1.5;font-weight:800;letter-spacing:-.2px;box-shadow:var(--shadow)}
+  .dot[data-desc]:hover::after{content:attr(data-desc);position:absolute;bottom:-14px;left:50%;transform:translate(-50%,100%);background:#fff;color:var(--ink);border:1px solid #e5e7eb;border-radius:14px;padding:14px 16px;min-width:260px;max-width:320px;line-height:1.7;box-shadow:var(--shadow);font-weight:600;white-space:normal}
+  @media(max-width:900px){.dot{width:180px;height:180px;padding:18px}.skills-dots::before{display:none}}
+
+  /* Sections generic */
+  .section{max-width:1100px;margin:100px auto;padding:0 20px}
+  .section h2{text-align:center;font-size:2rem;font-weight:900;margin-bottom:12px}
+  .section p.sub{color:var(--muted);text-align:center;margin-bottom:28px}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+  .card{background:#fff;border-radius:16px;padding:18px;box-shadow:var(--shadow)}
+  .card h3{font-size:1.05rem;margin-bottom:8px}
+  .card p{color:var(--muted);font-size:.95rem}
+
+  /* Projects */
+  #projects{max-width:1200px;margin:120px auto;padding:0 20px}
+  #projects h2{text-align:center;font-size:2rem;font-weight:900;margin-bottom:14px}
+  #projects p.sub{color:var(--muted);text-align:center;margin-bottom:50px}
+  .project-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:40px}
+  .project-card{background:#fff;border-radius:24px;box-shadow:var(--shadow);overflow:hidden;cursor:pointer;transition:all .3s ease}
+  .project-card:hover{transform:translateY(-6px);box-shadow:0 12px 32px rgba(0,0,0,.12)}
+  .project-thumb{width:100%;height:200px;background:#ddd;background-size:cover;background-position:center}
+  .project-info{padding:22px}
+  .project-info h3{font-size:1.15rem;margin-bottom:8px}
+  .project-info p{font-size:.95rem;color:var(--muted)}
+
+  /* Modal */
+  .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(3px);z-index:999;align-items:center;justify-content:center}
+  .modal-content{background:#fff;max-width:900px;width:90%;border-radius:20px;padding:30px;position:relative;overflow:auto;max-height:90vh;box-shadow:var(--shadow)}
+  .modal-content h3{font-size:1.3rem;margin-bottom:12px}
+  .modal-content .meta{color:var(--muted);margin-bottom:16px}
+  .modal-content ul{line-height:1.8;margin-left:20px}
+  .modal-content .close{position:absolute;top:12px;right:16px;background:var(--subaccent);border:none;padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:700}
+  .modal-content a.button{display:inline-block;margin-top:20px;background:var(--accent);color:#fff;padding:10px 18px;border-radius:10px;text-decoration:none;font-weight:700;transition:background .3s ease}
+  .modal-content a.button:hover{background:#4347b0}
+
+  /* Awards timeline */
+  #awards{max-width:1000px;margin:120px auto;padding:0 20px;position:relative}
+  #awards::before{content:'';position:absolute;left:50%;top:0;transform:translateX(-50%);width:2px;height:100%;border-right:2px dotted #bbb}
+  #awards h2{text-align:center;font-size:2rem;font-weight:900;margin-bottom:50px}
+  .timeline-item{position:relative;width:50%;padding:20px 40px}
+  .timeline-item.left{text-align:right;left:0}
+  .timeline-item.right{left:50%}
+  .timeline-item::before{content:'';position:absolute;top:30px;width:14px;height:14px;border-radius:50%;background:var(--accent);border:2px solid #fff;box-shadow:var(--shadow)}
+  .timeline-item.left::before{right:-7px}
+  .timeline-item.right::before{left:-7px}
+  .timeline-content{background:#fff;border-radius:20px;padding:24px;box-shadow:var(--shadow);transition:all .3s ease}
+  .timeline-content:hover{transform:translateY(-6px)}
+  .timeline-content h3{font-size:1.1rem;margin-bottom:10px;font-weight:700}
+  .timeline-content p{font-size:.95rem;color:var(--muted)}
+
+  /* Footer */
+  footer{margin:150px auto;text-align:center;line-height:2;color:var(--ink);font-size:1.2rem}
+  footer strong{font-weight:900}
+  footer .contact{margin-top:30px;font-size:1rem;line-height:1.8}
+
+  /* Reveal Animation */
+  .reveal{opacity:0;transform:translateY(16px)}
+  .reveal.show{opacity:1;transform:none;animation:fadeUp .8s ease forwards}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+  /* Floating Contact FAB */
+  .fab{position:fixed;right:22px;bottom:22px;z-index:1200;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+  .fab-btn{background:var(--accent);color:#fff;border:none;border-radius:999px;padding:12px 18px;font-weight:800;box-shadow:0 10px 24px rgba(0,0,0,.12);cursor:pointer;letter-spacing:.2px}
+  .fab-menu{display:none;background:#fff;border:1px solid #e5e7eb;border-radius:14px;box-shadow:0 12px 28px rgba(0,0,0,.12);overflow:hidden}
+  .fab.open .fab-menu{display:block;animation:fadeUp .2s ease forwards}
+  .fab-menu a{display:block;padding:12px 16px;color:var(--ink);text-decoration:none;white-space:nowrap}
+  .fab-menu a:hover{background:#f1f5f9}
+</style>
 </head>
 <body>
-  <!-- 접근성: 스킵 링크 -->
-  <a href="#main" class="skip-link">본문 바로가기</a>
+<header class="reveal">
+  <div class="slogan reveal">사용자의 눈높이에서 출발해, 배움을 가치 있는 경험으로 설계합니다.</div>
+  <div class="main-title reveal">
+    <span><strong>배움을 경험으로,</strong></span>
+    <span><strong>경험을 가치로.</strong></span>
+  </div>
+  <div class="contact reveal">
+    <strong>이서연</strong><br>010-8950-6942<br>sylee2003@gmail.com
+  </div>
+</header>
 
-  <!-- 스크롤 진행 막대 -->
-  <div class="scroll-progress" aria-hidden="true"><div class="scroll-progress__bar" id="scrollProgressBar"></div></div>
+<!-- Skills Dots -->
+<section id="skills" class="reveal">
+  <p class="intro">안녕하세요. 저는 사용자 눈높이에서 시작해, 배움을 가치 있는 경험으로 설계하는 기획자 <strong>이서연</strong>입니다.</p>
+  <div class="skills-dots" aria-label="핵심 역량">
+    <div class="dot reveal" data-desc="학습자 중심의 문제 해결형 콘텐츠를 기획·설계하여 교육 효과를 극대화합니다.">사용자 친화적<br>에듀테크 기획</div>
+    <div class="dot reveal" data-desc="사용자 관점에서 UX 개선점을 도출하고, 피그마를 활용해 직관적인 화면을 설계합니다.">사용자 중심<br>UI/UX 설계</div>
+    <div class="dot reveal" data-desc="데이터 기반 프로세스를 명확히 정리하고 협업 효율성을 높입니다.">구조화된<br>커뮤니케이션</div>
+  </div>
+</section>
 
-  <!-- Header: 고정 네비게이션 / 스무스 스크롤 -->
-  <header class="site-header" role="banner">
-    <div class="container header-inner">
-      <a class="brand" href="#hero" aria-label="홈으로 이동">Seoyeon</a>
-      <nav class="site-nav" aria-label="주요 섹션">
-        <ul>
-          <li><a class="nav-link" href="#hero">About</a></li>
-          <li><a class="nav-link" href="#education">Education</a></li>
-          <li><a class="nav-link" href="#projects">Projects</a></li>
-          <li><a class="nav-link" href="#statement">Statement</a></li>
-        </ul>
-      </nav>
+<!-- Resume Quick Link -->
+<section id="resume" class="section reveal">
+  <h2 class="reveal">이력서 / 포트폴리오</h2>
+  <p class="sub reveal">상세 문서는 아래 버튼으로 확인할 수 있어요.</p>
+  <div class="cards">
+    <div class="card reveal">
+      <h3>PDF 보기</h3>
+      <p>업로드하신 포트폴리오 PDF를 새 탭에서 확인합니다.</p>
+      <a class="btn" href="/mnt/data/이서연_포트폴리오_2025.pdf" target="_blank" rel="noopener">PDF 열기</a>
     </div>
-  </header>
+  </div>
+</section>
 
-  <main id="main">
-    <!-- Hero: 자기소개 + 핵심역량 + 전역 키워드 필터 버튼 -->
-    <section id="hero" class="section hero" aria-labelledby="hero-title">
-      <div class="container">
-        <h1 id="hero-title" class="hero-title">문제를 구조화하고 가치를 구체화하는 기획자, 이서연</h1>
-        <p class="hero-sub">핵심에 집중하는 정보 설계와 팀 협업으로 사용자 가치를 만듭니다.</p>
-
-        <div class="capabilities" role="list" aria-label="핵심 역량">
-          <article class="cap-card reveal" role="listitem" tabindex="0">
-            <h3>Problem Framing</h3>
-            <p>비즈니스·사용자·데이터 관점에서 문제를 정의하고 우선순위를 설정합니다.</p>
-          </article>
-          <article class="cap-card reveal" role="listitem" tabindex="0">
-            <h3>Information Architecture</h3>
-            <p>흐름과 구조를 명확히 하여 학습 비용을 줄이는 IA를 설계합니다.</p>
-          </article>
-          <article class="cap-card reveal" role="listitem" tabindex="0">
-            <h3>Experimentation</h3>
-            <p>가설 수립-실험-검증 사이클로 리스크를 줄이고 학습을 가속합니다.</p>
-          </article>
-          <article class="cap-card reveal" role="listitem" tabindex="0">
-            <h3>Collaboration</h3>
-            <p>디자인·개발과 긴밀히 협업하여 실행 가능한 산출물을 만듭니다.</p>
-          </article>
-        </div>
-
-        <div class="keyword-filter" aria-label="프로젝트 키워드 필터">
-          <div class="keyword-row">
-            <button class="tag-btn" data-tag="all" aria-pressed="true">All</button>
-            <button class="tag-btn" data-tag="UX">UX</button>
-            <button class="tag-btn" data-tag="UI">UI</button>
-            <button class="tag-btn" data-tag="Research">Research</button>
-            <button class="tag-btn" data-tag="Experiment">Experiment</button>
-            <button class="tag-btn" data-tag="Strategy">Strategy</button>
-          </div>
-        </div>
-
-        <!-- 영감 디자인: 점선 스크롤 큐 (Education으로 이동) -->
-        <a class="scroll-cue" href="#education" aria-label="학력 섹션으로 이동">
-          <span class="cue-label">소개</span>
-          <svg class="cue-path" width="220" height="120" viewBox="0 0 220 120" fill="none" aria-hidden="true">
-            <path d="M2 2 C 120 2, 120 118, 218 118" stroke="#4da3ff" stroke-width="2" stroke-dasharray="4 6" stroke-linecap="round"></path>
-          </svg>
-          <span class="cue-dot" aria-hidden="true"></span>
-        </a>
-      </div>
-    </section>
-
-    <!-- Education: 테이블 형태 -->
-    <section id="education" class="section education" aria-labelledby="edu-title">
-      <div class="container">
-        <h2 id="edu-title" class="section-title">Education</h2>
-        <div class="table-wrap reveal">
-          <table class="edu-table">
-            <caption class="sr-only">교육 이력</caption>
-            <thead>
-              <tr>
-                <th scope="col">기간</th>
-                <th scope="col">기관</th>
-                <th scope="col">전공/과정</th>
-                <th scope="col">비고</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>2019 - 2023</td>
-                <td>OOO 대학교</td>
-                <td>산업공학 / HCI 트랙</td>
-                <td>학사</td>
-              </tr>
-              <tr>
-                <td>2024</td>
-                <td>온라인 부트캠프</td>
-                <td>제품 기획 · UX 리서치</td>
-                <td>수료</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- Projects: 좌측 필터 + 우측 아코디언 카드 (탭 포함) -->
-    <section id="projects" class="section projects" aria-labelledby="proj-title">
-      <div class="container">
-        <h2 id="proj-title" class="section-title">Projects</h2>
-
-        <div class="projects-layout">
-          <!-- 사이드바 필터 (모바일에서는 상단 드롭다운) -->
-          <aside class="sidebar" aria-label="프로젝트 필터">
-            <div class="filter-group reveal">
-              <h3 class="filter-title">Filter by Tags</h3>
-              <div class="filter-tags">
-                <button class="filter-btn" data-tag="UX">UX</button>
-                <button class="filter-btn" data-tag="UI">UI</button>
-                <button class="filter-btn" data-tag="Research">Research</button>
-                <button class="filter-btn" data-tag="Experiment">Experiment</button>
-                <button class="filter-btn" data-tag="Strategy">Strategy</button>
-              </div>
-
-              <label class="filter-select-label" for="filterSelect">Tags (mobile)</label>
-              <select id="filterSelect" class="filter-select" aria-label="모바일 태그 필터">
-                <option value="all">All</option>
-                <option value="UX">UX</option>
-                <option value="UI">UI</option>
-                <option value="Research">Research</option>
-                <option value="Experiment">Experiment</option>
-                <option value="Strategy">Strategy</option>
-              </select>
-            </div>
-          </aside>
-
-          <div class="project-list" id="projectList">
-            <!-- Project 1 -->
-            <article class="project-card reveal" data-tags="UX,Research,Strategy" aria-labelledby="p1-title">
-              <header class="project-header">
-                <h3 id="p1-title" class="project-title">Bookly: 독서 기록 경험 개선</h3>
-                <div class="project-meta">
-                  <span class="tag">UX</span>
-                  <span class="tag">Research</span>
-                  <span class="tag">Strategy</span>
-                </div>
-                <button class="accordion-toggle" aria-expanded="false" aria-controls="p1-content">상세 보기</button>
-              </header>
-
-              <div id="p1-content" class="accordion-content" hidden>
-                <div class="tabs" role="tablist" aria-label="Bookly 상세">
-                  <button role="tab" aria-selected="true" aria-controls="p1-panel-overview" id="p1-tab-overview" class="tab">Overview</button>
-                  <button role="tab" aria-selected="false" aria-controls="p1-panel-process" id="p1-tab-process" class="tab">Process</button>
-                  <button role="tab" aria-selected="false" aria-controls="p1-panel-outcome" id="p1-tab-outcome" class="tab">Outcome</button>
-                </div>
-                <div tabindex="0" role="tabpanel" id="p1-panel-overview" aria-labelledby="p1-tab-overview" class="tab-panel fade in">
-                  <p>독서 기록 데이터의 지속성을 높이기 위한 IA 재설계와 참여 유도 설계.</p>
-                  <a class="ext-link" href="https://www.figma.com/design/NuKhWNles14UnicK4Yvfb6/%EC%A0%9C%EB%AA%A9-%EC%97%86%EC%9D%8C" target="_blank" rel="noopener noreferrer">Figma 보기</a>
-                </div>
-                <div tabindex="0" role="tabpanel" id="p1-panel-process" aria-labelledby="p1-tab-process" class="tab-panel fade" hidden>
-                  <ul>
-                    <li>정성·정량 리서치 기반 문제 정의</li>
-                    <li>핵심 여정의 마찰 포인트 제거</li>
-                    <li>AB 실험안 설계 및 KPI 선정</li>
-                  </ul>
-                </div>
-                <div tabindex="0" role="tabpanel" id="p1-panel-outcome" aria-labelledby="p1-tab-outcome" class="tab-panel fade" hidden>
-                  <p>주간 활성 기록 비율 +18%, 목표 달성률 +12% 예측.</p>
-                </div>
-              </div>
-            </article>
-
-            <!-- Project 2 -->
-            <article class="project-card reveal" data-tags="UI,UX,Experiment" aria-labelledby="p2-title">
-              <header class="project-header">
-                <h3 id="p2-title" class="project-title">쿠팡 앱: 탐색 흐름 개선 제안</h3>
-                <div class="project-meta">
-                  <span class="tag">UI</span>
-                  <span class="tag">UX</span>
-                  <span class="tag">Experiment</span>
-                </div>
-                <button class="accordion-toggle" aria-expanded="false" aria-controls="p2-content">상세 보기</button>
-              </header>
-
-              <div id="p2-content" class="accordion-content" hidden>
-                <div class="tabs" role="tablist" aria-label="쿠팡 상세">
-                  <button role="tab" aria-selected="true" aria-controls="p2-panel-overview" id="p2-tab-overview" class="tab">Overview</button>
-                  <button role="tab" aria-selected="false" aria-controls="p2-panel-process" id="p2-tab-process" class="tab">Process</button>
-                  <button role="tab" aria-selected="false" aria-controls="p2-panel-outcome" id="p2-tab-outcome" class="tab">Outcome</button>
-                </div>
-                <div tabindex="0" role="tabpanel" id="p2-panel-overview" aria-labelledby="p2-tab-overview" class="tab-panel fade in">
-                  <p>카테고리 탐색의 인지 부하를 줄이는 UI 구조 및 실험안 제안.</p>
-                  <a class="ext-link" href="https://www.figma.com/design/ZlSxom4kVmfEvw4KoiUe4J/" target="_blank" rel="noopener noreferrer">Figma 보기</a>
-                </div>
-                <div tabindex="0" role="tabpanel" id="p2-panel-process" aria-labelledby="p2-tab-process" class="tab-panel fade" hidden>
-                  <ul>
-                    <li>벤치마킹 및 카드소팅</li>
-                    <li>프로토타입 테스트와 반복 개선</li>
-                  </ul>
-                </div>
-                <div tabindex="0" role="tabpanel" id="p2-panel-outcome" aria-labelledby="p2-tab-outcome" class="tab-panel fade" hidden>
-                  <p>탐색 완료 시간 -15% 목표, 클릭 정확도 +10% 목표.</p>
-                </div>
-              </div>
-            </article>
-
-            <!-- Project 3 -->
-            <article class="project-card reveal" data-tags="Research,Strategy" aria-labelledby="p3-title">
-              <header class="project-header">
-                <h3 id="p3-title" class="project-title">AI와 친해져요: 학습 경험 설계</h3>
-                <div class="project-meta">
-                  <span class="tag">Research</span>
-                  <span class="tag">Strategy</span>
-                </div>
-                <button class="accordion-toggle" aria-expanded="false" aria-controls="p3-content">상세 보기</button>
-              </header>
-
-              <div id="p3-content" class="accordion-content" hidden>
-                <div class="tabs" role="tablist" aria-label="AI와 친해져요 상세">
-                  <button role="tab" aria-selected="true" aria-controls="p3-panel-overview" id="p3-tab-overview" class="tab">Overview</button>
-                  <button role="tab" aria-selected="false" aria-controls="p3-panel-process" id="p3-tab-process" class="tab">Process</button>
-                  <button role="tab" aria-selected="false" aria-controls="p3-panel-outcome" id="p3-tab-outcome" class="tab">Outcome</button>
-                </div>
-                <div tabindex="0" role="tabpanel" id="p3-panel-overview" aria-labelledby="p3-tab-overview" class="tab-panel fade in">
-                  <p>생성형 AI의 첫 경험을 안전하고 흥미롭게 만드는 콘텐츠 아키텍처.</p>
-                  <a class="ext-link" href="https://drive.google.com/file/d/1-8tN_ztfFAOCJkj43-vFxVHp65qSSkmK/view" target="_blank" rel="noopener noreferrer">Drive 보기</a>
-                </div>
-                <div tabindex="0" role="tabpanel" id="p3-panel-process" aria-labelledby="p3-tab-process" class="tab-panel fade" hidden>
-                  <ul>
-                    <li>학습자 여정 정의 및 난이도 곡선 설계</li>
-                    <li>콘텐츠 모듈화와 반복 테스트</li>
-                  </ul>
-                </div>
-                <div tabindex="0" role="tabpanel" id="p3-panel-outcome" aria-labelledby="p3-tab-outcome" class="tab-panel fade" hidden>
-                  <p>초보자 이탈률 -20% 목표, 자기효능감 지표 +15% 목표.</p>
-                </div>
-              </div>
-            </article>
-
-            <!-- Project 4 -->
-            <article class="project-card reveal" data-tags="UX,Experiment" aria-labelledby="p4-title">
-              <header class="project-header">
-                <h3 id="p4-title" class="project-title">알파미니 기반 프로젝트</h3>
-                <div class="project-meta">
-                  <span class="tag">UX</span>
-                  <span class="tag">Experiment</span>
-                </div>
-                <button class="accordion-toggle" aria-expanded="false" aria-controls="p4-content">상세 보기</button>
-              </header>
-
-              <div id="p4-content" class="accordion-content" hidden>
-                <div class="tabs" role="tablist" aria-label="알파미니 상세">
-                  <button role="tab" aria-selected="true" aria-controls="p4-panel-overview" id="p4-tab-overview" class="tab">Overview</button>
-                  <button role="tab" aria-selected="false" aria-controls="p4-panel-process" id="p4-tab-process" class="tab">Process</button>
-                  <button role="tab" aria-selected="false" aria-controls="p4-panel-outcome" id="p4-tab-outcome" class="tab">Outcome</button>
-                </div>
-                <div tabindex="0" role="tabpanel" id="p4-panel-overview" aria-labelledby="p4-tab-overview" class="tab-panel fade in">
-                  <p>소셜 로봇과 상호작용 설계를 통한 몰입도 향상 실험.</p>
-                  <a class="ext-link" href="https://drive.google.com/file/d/1WobASMsa-ZXrfrlzp7s3rCLpd0ht642X/view" target="_blank" rel="noopener noreferrer">Drive 보기</a>
-                </div>
-                <div tabindex="0" role="tabpanel" id="p4-panel-process" aria-labelledby="p4-tab-process" class="tab-panel fade" hidden>
-                  <ul>
-                    <li>행동 데이터 수집 및 분석</li>
-                    <li>상호작용 스크립트 실험</li>
-                  </ul>
-                </div>
-                <div tabindex="0" role="tabpanel" id="p4-panel-outcome" aria-labelledby="p4-tab-outcome" class="tab-panel fade" hidden>
-                  <p>참여 유지시간 +22% 목표, 긍정 피드백 비율 +14% 목표.</p>
-                </div>
-              </div>
-            </article>
-
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Statement: 자기소개서 카드형 본문 -->
-    <section id="statement" class="section statement" aria-labelledby="st-title">
-      <div class="container">
-        <h2 id="st-title" class="section-title">Statement</h2>
-        <article class="statement-card reveal" tabindex="0">
-          <p>
-            저는 문제를 단순화하고 핵심 가치를 빠르게 드러내는 설계를 지향합니다. 모호함을 구조화하고,
-            팀이 동일한 방향을 바라보도록 돕습니다. 사용자와 비즈니스가 동시에 만족하는 지점을 찾는 일에
-            가장 큰 동기를 느낍니다.
-          </p>
-          <p>
-            데이터에 기반한 실험과 학습, 그리고 명확한 문서화를 통해 팀 속도를 높입니다. 실행 가능한 설계와
-            검증 가능한 목표를 제시하여 리스크를 줄이고 성장의 단서를 만듭니다.
-          </p>
-        </article>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer" role="contentinfo">
-    <div class="container footer-inner">
-      <span>© <span id="year"></span> Seoyeon Lee</span>
-      <span aria-live="polite">Visible projects: <strong id="visibleCount">0</strong></span>
+<!-- Education (updated as requested) -->
+<section id="education" class="section reveal">
+  <h2 class="reveal">교육 및 학력</h2>
+  <p class="sub reveal">요청해 주신 문구를 그대로 반영했습니다.</p>
+  <div class="cards">
+    <div class="card reveal">
+      <h3>가천대학교 유아교육학과</h3>
+      <p>[학점: 4.15 / 4.5]<br>2022.03 - 졸업 예정자 (휴학)</p>
     </div>
-  </footer>
+    <div class="card reveal">
+      <h3>성수고등학교 졸업</h3>
+      <p>2019.03 - 2022.02</p>
+    </div>
+    <div class="card reveal">
+      <h3>에듀테크 PM 부트캠프 ㅣ 천재교육</h3>
+      <p>2025.06 - 현재(수강중)</p>
+    </div>
+  </div>
+</section>
 
-  <!-- 맨 위로 버튼 -->
-  <button id="toTop" class="to-top" type="button" aria-label="맨 위로 이동" hidden>↑</button>
+<!-- Projects -->
+<section id="projects" class="reveal">
+  <h2 class="reveal">주요 프로젝트</h2>
+  <p class="sub reveal">카드를 클릭하면 프로젝트 상세를 확인할 수 있습니다</p>
+  <div class="project-grid">
+    <div class="project-card reveal" data-id="myfolio"><div class="project-thumb" style="background-image:url('https://via.placeholder.com/400x200/8B89FF/ffffff?text=Myfolio');"></div><div class="project-info"><h3>Myfolio 웹 서비스 UX/UI 개선</h3><p>UX 플로우 재구성 및 반응형 UI 리디자인</p></div></div>
+    <div class="project-card reveal" data-id="ieodream"><div class="project-thumb" style="background-image:url('https://via.placeholder.com/400x200/D4D7FF/333333?text=이어드림');"></div><div class="project-info"><h3>이어드림</h3><p>시니어 친화형 소식 공유 앱 UX/UI</p></div></div>
+    <div class="project-card reveal" data-id="coupang"><div class="project-thumb" style="background-image:url('https://via.placeholder.com/400x200/AAAAFF/333333?text=쿠팡+UX');"></div><div class="project-info"><h3>쿠팡 앱 UX/UI 개선</h3><p>문제 해결 중심 서비스 개선</p></div></div>
+    <div class="project-card reveal" data-id="chally"><div class="project-thumb" style="background-image:url('https://via.placeholder.com/400x200/BBBBFF/ffffff?text=Chally');"></div><div class="project-info"><h3>가족 챌린지 메이트, Chally</h3><p>가족 간 대화 단절 해결 챌린지 앱</p></div></div>
+    <div class="project-card reveal" data-id="bookly"><div class="project-thumb" style="background-image:url('https://via.placeholder.com/400x200/CCCCFF/333333?text=북클리');"></div><div class="project-info"><h3>북클리</h3><p>초등 독서 앱 기획 및 UX 설계</p></div></div>
+    <div class="project-card reveal" data-id="ai"><div class="project-thumb" style="background-image:url('https://via.placeholder.com/400x200/DDDDEE/333333?text=AI%EC%99%80+%EC%B9%9C%ED%95%B4%EC%A0%B8%EC%9A%94');"></div><div class="project-info"><h3>AI와 친해져요</h3><p>감각중심 AI 체험 교육 프로그램</p></div></div>
+    <div class="project-card reveal" data-id="robot"><div class="project-thumb" style="background-image:url('https://via.placeholder.com/400x200/5B5FC7/ffffff?text=AI%EC%99%80+%ED%95%A8%EA%BB%98%ED%95%98%EB%8A%94+%EC%A0%84%EA%B5%AD%EC%97%AC%ED%96%89');"></div><div class="project-info"><h3>AI와 함께하는 전국여행</h3><p>알파미니 기반 보드게임형 AI 로봇 콘텐츠</p></div></div>
+    <div class="project-card reveal" data-id="digilog"><div class="project-thumb" style="background-image:url('https://via.placeholder.com/400x200/EEEEFF/333333?text=디지로그');"></div><div class="project-info"><h3>디지로그 세대통합 놀이</h3><p>유아-조부모 세대 융합 프로그램</p></div></div>
+  </div>
+</section>
 
-  <script src="./script.js" defer></script>
+<!-- Awards -->
+<section id="awards" class="reveal">
+  <h2 class="reveal">수상 및 주요 경험 🏆</h2>
+  <div class="timeline-item left reveal"><div class="timeline-content"><h3>2025 주식회사 베어러블 Myfolio 서비스 UI/UX 개선 공모전</h3><p>수료</p></div></div>
+  <div class="timeline-item right reveal"><div class="timeline-content"><h3>2025 블레이버스 MVP 개발 해커톤 대회</h3><p>대상 수상</p></div></div>
+  <div class="timeline-item left reveal"><div class="timeline-content"><h3>2025 Blaybus 실전 서비스 기획 공모전</h3><p>수료</p></div></div>
+  <div class="timeline-item right reveal"><div class="timeline-content"><h3>2025 가천대학교 저출산 극복을 위한 유아대상 교안 공모전</h3><p>장려상</p></div></div>
+  <div class="timeline-item left reveal"><div class="timeline-content"><h3>2024 가천대학교 유아교육학과 비교과 프로그램 공모전</h3><p>대상</p></div></div>
+  <div class="timeline-item right reveal"><div class="timeline-content"><h3>2024 가천대학교 제 2회 학술발표대회</h3><p>장려상</p></div></div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p class="reveal"><strong>끝까지 책임으로 완성하는 기획자, 이서연 입니다.</strong></p>
+  <div class="contact reveal" id="footer-contact">
+    이서연<br>010-8950-6942<br>sylee2003@gmail.com
+  </div>
+</footer>
+
+<!-- Modal -->
+<div class="modal" id="projectModal"><div class="modal-content"><button class="close">닫기</button><div id="modalBody"></div></div></div>
+
+<!-- Floating Contact Button -->
+<div class="fab" id="fab">
+  <div class="fab-menu">
+    <a href="mailto:sylee2003@gmail.com?subject=%5BPortfolio%5D%20%EC%9D%B4%EC%84%9C%EC%97%B0%20%EA%B8%B0%ED%9A%8D%EC%9E%90%20%EC%A7%88%EC%9D%98">📧 이메일 보내기</a>
+    <a href="#footer-contact">📇 연락처 보기</a>
+    <a href="tel:01089506942">📞 전화 걸기</a>
+  </div>
+  <button class="fab-btn" aria-label="Contact">Contact</button>
+</div>
+
+<script>
+// Reveal on scroll
+(function(){
+  const els=document.querySelectorAll('.reveal');
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach((e)=>{
+      if(e.isIntersecting){
+        e.target.style.animationDelay=(Array.from(els).indexOf(e.target)*100)+'ms';
+        e.target.classList.add('show');
+        io.unobserve(e.target);
+      }
+    });
+  },{threshold:0.15});
+  els.forEach(el=>io.observe(el));
+})();
+
+// Floating contact menu toggle
+(function(){
+  const fab=document.getElementById('fab');
+  const btn=fab.querySelector('.fab-btn');
+  btn.addEventListener('click',()=>fab.classList.toggle('open'));
+  document.addEventListener('click',(e)=>{ if(!fab.contains(e.target)) fab.classList.remove('open'); });
+})();
+
+// Project modal data
+const data={
+  myfolio:`<h3>주식회사 베어러블 Myfolio 웹 서비스 UX/UI 개선 공모전 프로젝트</h3><div class='meta'>2025.09</div><ul><li>UX 플로우 재구성 및 반응형 UI 리디자인 수행</li><li>2인 팀 구성, 문제 정의·사용자 페인포인트 분석·경쟁사 조사 및 리브랜딩 방향 제안</li><li>학생 맞춤형 UX 플로우 설계 및 세특 작성 가이드화</li><li>문장 단위 수정·위치 변경·예시 제시 등 참여형 인터랙티브 UI 기획</li><li>블레이버스 워크스페이스·디스코드 협업, 피그마 컴포넌트(호버·배너·팝업) 구현</li><li>블레이버스 공모전 최종 제출 및 수료 완료</li></ul><a href='https://www.figma.com/design/ZlSxom4kVmfEvw4KoiUe4J' class='button' target='_blank' rel='noopener noreferrer'>보러가기</a>`,
+  ieodream:`<h3>이어드림 – 시니어 친화형 앱·책자·팜플렛 UX/UI 디자인</h3><div class='meta'>2025.08</div><ul><li>MVP 개발 해커톤에 UI/UX 디자이너로 참여</li><li>시니어 타깃 UX/UI 특성 분석 및 경쟁사 조사, 리브랜딩/로고 제안</li><li>기능정의서·IA 구조로 서비스 흐름 정립, 접근성 높은 디자인 시스템 구축</li><li>소식쓰기·마이페이지·소식함 네비게이션 설계, AIUT 73%로 UI 명확도 검증</li><li>PM·FE·BE와 협업, 일정 관리 체계화, 대표 디자이너로 Q&A/부스 발표</li><li>창의성과 실현 가능성 인정, 대상 수상</li></ul><a href='https://www.figma.com/design/ZlSxom4kVmfEvw4KoiUe4J' class='button' target='_blank' rel='noopener noreferrer'>보러가기</a>`,
+  coupang:`<h3>쿠팡 앱 UI/UX 개선 – 문제 해결 중심 서비스 개선 프로젝트</h3><div class='meta'>2025.08</div><ul><li>사용자 불편 요인 분석을 통해 UX/UI 개선 방향 제시</li><li>3인 팀, 41명 설문·플레이스토어 리뷰 크롤링 데이터 분석</li><li>워드클라우드·페인포인트·AS-IS/TO-BE 모델링 및 개선안 설계</li><li>블레이버스 워크스페이스·디스코드로 일정/업무 분담</li><li>실전 서비스 기획 공모전 최종 제출 및 수료</li></ul><a href='https://www.figma.com/design/ZlSxom4kVmfEvw4KoiUe4J' class='button' target='_blank' rel='noopener noreferrer'>보러가기</a>`,
+  chally:`<h3>가족 챌린지 메이트, Chally – 가족이 함께 습관을 만들고 추억을 쌓는 챌린지 앱 기획</h3><div class='meta'>2025.07</div><ul><li>가족 간 대화 단절 해결 및 아동 습관 형성/정서 유대 강화 목표</li><li>문제 정의·경쟁사 분석·비즈니스 모델 수립·데이터 플로우 설계</li><li>피그마 플러그인·커서(Cursor)로 UI 디자인 및 프로토타입 구현 시도</li><li>실무자 협업·원격 회의·실사용자 테스트 진행, 프레젠테이션 검증</li></ul><a href='https://www.figma.com/design/ZlSxom4kVmfEvw4KoiUe4J' class='button' target='_blank' rel='noopener noreferrer'>보러가기</a>`,
+  bookly:`<h3>함께하는 즐거움: 북클리 – AI 추천·독서 미러링·골든벨 기반 초등 독서 앱 기획</h3><div class='meta'>2025.06</div><ul><li>독서량 감소·문해력 저하 문제 분석 및 사용자 니즈 파악</li><li>경쟁사 분석으로 페인포인트 도출, ‘함께 읽기’ 중심 MVP 제안</li><li>페르소나·유저저니·기능정의·비즈니스 전략 수립</li><li>9명 사용자 테스트(16 시나리오)로 4건 핵심 UX 개선 반영</li><li>KPI(AARRR) 기반 성장 전략, 피그마 설계·프로토타입·4차 발표</li></ul><a href='https://www.figma.com/design/NuKhWNles14UnicK4Yvfb6' class='button' target='_blank' rel='noopener noreferrer'>보러가기</a>`,
+  ai:`<h3>AI와 친해져요 – 로봇과 놀이하며 배우는 감각중심 AI 체험 교육</h3><div class='meta'>2025.05</div><ul><li>감각·감성·창의 중심 학습 지원, AI 이해·디지털 기초 역량 강화</li><li>전공 3인 팀, 커리큘럼 설계·사례 조사·평가지표/퍼실리테이터 운영 설계</li><li>AI로봇과학관 견학과 리서치로 필요성·문제점 도출, 방향성 수립</li><li>2019 누리과정 기반, 경험주의·체화 인지이론 통합</li><li>과목 A+ 취득, 정책 공모전 아이디어 제안서로 발전</li></ul><a href='https://drive.google.com/file/d/1-8tN_ztfFAOCJkj43-vFxVHp65qSSkmK/view' class='button' target='_blank' rel='noopener noreferrer'>보러가기</a>`,
+  robot:`<h3>AI와 함께하는 전국여행 – 알파미니 기반 AI·로봇 보드게임형 놀이콘텐츠</h3><div class='meta'>2024.11</div><ul><li>알파미니와 보드게임 요소 결합, 양방향 상호작용형 교육 콘텐츠 구현</li><li>디지털 과의존·전환 문제 분석, 협력·공감·자기조절 발달 지원 설계</li><li>교구 디자인·연동 코딩으로 프로토타입 제작, 6~8세 테스트 및 개선</li><li>교사·부모용 가이드·학술제 발표, 현장 피드백 반영</li><li>가천대 바텀업 프로젝트 공모전 대상 수상</li></ul><a href='https://drive.google.com/file/d/1WobASMsa-ZXrfrlzp7s3rCLpd0ht642X/view' class='button' target='_blank' rel='noopener noreferrer'>보러가기</a>`,
+  digilog:`<h3>디지로그 융합 유아–조부모 통합 놀이 프로그램 기획</h3><div class='meta'>2024.10</div><ul><li>문헌 분석을 통한 문제 인식·서론 구체화</li><li>아날로그+디지털 결합 오브젝트 설계 방향, ADDIE 분석</li><li>놀이 모형(비봇처럼/내가 만든 로봇/알파미니와 함께하는 전국 여행) 제안</li><li>유아 사회성·협동성·프로그래밍 기초 역량 발달 효과 제시</li><li>학술제 최종 발표, 실천 가능성 검증</li></ul><a href='https://drive.google.com/file/d/10yShhrqhWp1UBqQjUMmYp7LoTV_Rhnyx/view' class='button' target='_blank' rel='noopener noreferrer'>보러가기</a>`
+};
+
+// Modal wiring
+(function(){
+  const modal=document.getElementById('projectModal');
+  const body=document.getElementById('modalBody');
+  const close=modal.querySelector('.close');
+  document.querySelectorAll('.project-card').forEach(c=>c.addEventListener('click',()=>{
+    body.innerHTML=data[c.dataset.id]||'';
+    modal.style.display='flex';
+  }));
+  close.addEventListener('click',()=>modal.style.display='none');
+  modal.addEventListener('click',e=>{if(e.target===modal) modal.style.display='none'});
+})();
+</script>
 </body>
 </html>
-
-
-
