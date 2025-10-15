@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>이서연 포트폴리오</title>
+  <meta name="description" content="기획자 이서연의 인터랙티브 포트폴리오">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <!-- 접근성: 스킵 링크 -->
+  <a href="#main" class="skip-link">본문 바로가기</a>
+
+  <!-- 스크롤 진행 막대 -->
+  <div class="scroll-progress" aria-hidden="true"><div class="scroll-progress__bar" id="scrollProgressBar"></div></div>
+
+  <!-- Header: 고정 네비게이션 / 스무스 스크롤 -->
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <a class="brand" href="#hero" aria-label="홈으로 이동">Seoyeon</a>
+      <nav class="site-nav" aria-label="주요 섹션">
+        <ul>
+          <li><a class="nav-link" href="#hero">About</a></li>
+          <li><a class="nav-link" href="#education">Education</a></li>
+          <li><a class="nav-link" href="#projects">Projects</a></li>
+          <li><a class="nav-link" href="#statement">Statement</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Hero: 자기소개 + 핵심역량 + 전역 키워드 필터 버튼 -->
+    <section id="hero" class="section hero" aria-labelledby="hero-title">
+      <div class="container">
+        <h1 id="hero-title" class="hero-title">문제를 구조화하고 가치를 구체화하는 기획자, 이서연</h1>
+        <p class="hero-sub">핵심에 집중하는 정보 설계와 팀 협업으로 사용자 가치를 만듭니다.</p>
+
+        <div class="capabilities" role="list" aria-label="핵심 역량">
+          <article class="cap-card reveal" role="listitem" tabindex="0">
+            <h3>Problem Framing</h3>
+            <p>비즈니스·사용자·데이터 관점에서 문제를 정의하고 우선순위를 설정합니다.</p>
+          </article>
+          <article class="cap-card reveal" role="listitem" tabindex="0">
+            <h3>Information Architecture</h3>
+            <p>흐름과 구조를 명확히 하여 학습 비용을 줄이는 IA를 설계합니다.</p>
+          </article>
+          <article class="cap-card reveal" role="listitem" tabindex="0">
+            <h3>Experimentation</h3>
+            <p>가설 수립-실험-검증 사이클로 리스크를 줄이고 학습을 가속합니다.</p>
+          </article>
+          <article class="cap-card reveal" role="listitem" tabindex="0">
+            <h3>Collaboration</h3>
+            <p>디자인·개발과 긴밀히 협업하여 실행 가능한 산출물을 만듭니다.</p>
+          </article>
+        </div>
+
+        <div class="keyword-filter" aria-label="프로젝트 키워드 필터">
+          <div class="keyword-row">
+            <button class="tag-btn" data-tag="all" aria-pressed="true">All</button>
+            <button class="tag-btn" data-tag="UX">UX</button>
+            <button class="tag-btn" data-tag="UI">UI</button>
+            <button class="tag-btn" data-tag="Research">Research</button>
+            <button class="tag-btn" data-tag="Experiment">Experiment</button>
+            <button class="tag-btn" data-tag="Strategy">Strategy</button>
+          </div>
+        </div>
+
+        <!-- 영감 디자인: 점선 스크롤 큐 (Education으로 이동) -->
+        <a class="scroll-cue" href="#education" aria-label="학력 섹션으로 이동">
+          <span class="cue-label">소개</span>
+          <svg class="cue-path" width="220" height="120" viewBox="0 0 220 120" fill="none" aria-hidden="true">
+            <path d="M2 2 C 120 2, 120 118, 218 118" stroke="#4da3ff" stroke-width="2" stroke-dasharray="4 6" stroke-linecap="round"></path>
+          </svg>
+          <span class="cue-dot" aria-hidden="true"></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Education: 테이블 형태 -->
+    <section id="education" class="section education" aria-labelledby="edu-title">
+      <div class="container">
+        <h2 id="edu-title" class="section-title">Education</h2>
+        <div class="table-wrap reveal">
+          <table class="edu-table">
+            <caption class="sr-only">교육 이력</caption>
+            <thead>
+              <tr>
+                <th scope="col">기간</th>
+                <th scope="col">기관</th>
+                <th scope="col">전공/과정</th>
+                <th scope="col">비고</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>2019 - 2023</td>
+                <td>OOO 대학교</td>
+                <td>산업공학 / HCI 트랙</td>
+                <td>학사</td>
+              </tr>
+              <tr>
+                <td>2024</td>
+                <td>온라인 부트캠프</td>
+                <td>제품 기획 · UX 리서치</td>
+                <td>수료</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects: 좌측 필터 + 우측 아코디언 카드 (탭 포함) -->
+    <section id="projects" class="section projects" aria-labelledby="proj-title">
+      <div class="container">
+        <h2 id="proj-title" class="section-title">Projects</h2>
+
+        <div class="projects-layout">
+          <!-- 사이드바 필터 (모바일에서는 상단 드롭다운) -->
+          <aside class="sidebar" aria-label="프로젝트 필터">
+            <div class="filter-group reveal">
+              <h3 class="filter-title">Filter by Tags</h3>
+              <div class="filter-tags">
+                <button class="filter-btn" data-tag="UX">UX</button>
+                <button class="filter-btn" data-tag="UI">UI</button>
+                <button class="filter-btn" data-tag="Research">Research</button>
+                <button class="filter-btn" data-tag="Experiment">Experiment</button>
+                <button class="filter-btn" data-tag="Strategy">Strategy</button>
+              </div>
+
+              <label class="filter-select-label" for="filterSelect">Tags (mobile)</label>
+              <select id="filterSelect" class="filter-select" aria-label="모바일 태그 필터">
+                <option value="all">All</option>
+                <option value="UX">UX</option>
+                <option value="UI">UI</option>
+                <option value="Research">Research</option>
+                <option value="Experiment">Experiment</option>
+                <option value="Strategy">Strategy</option>
+              </select>
+            </div>
+          </aside>
+
+          <div class="project-list" id="projectList">
+            <!-- Project 1 -->
+            <article class="project-card reveal" data-tags="UX,Research,Strategy" aria-labelledby="p1-title">
+              <header class="project-header">
+                <h3 id="p1-title" class="project-title">Bookly: 독서 기록 경험 개선</h3>
+                <div class="project-meta">
+                  <span class="tag">UX</span>
+                  <span class="tag">Research</span>
+                  <span class="tag">Strategy</span>
+                </div>
+                <button class="accordion-toggle" aria-expanded="false" aria-controls="p1-content">상세 보기</button>
+              </header>
+
+              <div id="p1-content" class="accordion-content" hidden>
+                <div class="tabs" role="tablist" aria-label="Bookly 상세">
+                  <button role="tab" aria-selected="true" aria-controls="p1-panel-overview" id="p1-tab-overview" class="tab">Overview</button>
+                  <button role="tab" aria-selected="false" aria-controls="p1-panel-process" id="p1-tab-process" class="tab">Process</button>
+                  <button role="tab" aria-selected="false" aria-controls="p1-panel-outcome" id="p1-tab-outcome" class="tab">Outcome</button>
+                </div>
+                <div tabindex="0" role="tabpanel" id="p1-panel-overview" aria-labelledby="p1-tab-overview" class="tab-panel fade in">
+                  <p>독서 기록 데이터의 지속성을 높이기 위한 IA 재설계와 참여 유도 설계.</p>
+                  <a class="ext-link" href="https://www.figma.com/design/NuKhWNles14UnicK4Yvfb6/%EC%A0%9C%EB%AA%A9-%EC%97%86%EC%9D%8C" target="_blank" rel="noopener noreferrer">Figma 보기</a>
+                </div>
+                <div tabindex="0" role="tabpanel" id="p1-panel-process" aria-labelledby="p1-tab-process" class="tab-panel fade" hidden>
+                  <ul>
+                    <li>정성·정량 리서치 기반 문제 정의</li>
+                    <li>핵심 여정의 마찰 포인트 제거</li>
+                    <li>AB 실험안 설계 및 KPI 선정</li>
+                  </ul>
+                </div>
+                <div tabindex="0" role="tabpanel" id="p1-panel-outcome" aria-labelledby="p1-tab-outcome" class="tab-panel fade" hidden>
+                  <p>주간 활성 기록 비율 +18%, 목표 달성률 +12% 예측.</p>
+                </div>
+              </div>
+            </article>
+
+            <!-- Project 2 -->
+            <article class="project-card reveal" data-tags="UI,UX,Experiment" aria-labelledby="p2-title">
+              <header class="project-header">
+                <h3 id="p2-title" class="project-title">쿠팡 앱: 탐색 흐름 개선 제안</h3>
+                <div class="project-meta">
+                  <span class="tag">UI</span>
+                  <span class="tag">UX</span>
+                  <span class="tag">Experiment</span>
+                </div>
+                <button class="accordion-toggle" aria-expanded="false" aria-controls="p2-content">상세 보기</button>
+              </header>
+
+              <div id="p2-content" class="accordion-content" hidden>
+                <div class="tabs" role="tablist" aria-label="쿠팡 상세">
+                  <button role="tab" aria-selected="true" aria-controls="p2-panel-overview" id="p2-tab-overview" class="tab">Overview</button>
+                  <button role="tab" aria-selected="false" aria-controls="p2-panel-process" id="p2-tab-process" class="tab">Process</button>
+                  <button role="tab" aria-selected="false" aria-controls="p2-panel-outcome" id="p2-tab-outcome" class="tab">Outcome</button>
+                </div>
+                <div tabindex="0" role="tabpanel" id="p2-panel-overview" aria-labelledby="p2-tab-overview" class="tab-panel fade in">
+                  <p>카테고리 탐색의 인지 부하를 줄이는 UI 구조 및 실험안 제안.</p>
+                  <a class="ext-link" href="https://www.figma.com/design/ZlSxom4kVmfEvw4KoiUe4J/" target="_blank" rel="noopener noreferrer">Figma 보기</a>
+                </div>
+                <div tabindex="0" role="tabpanel" id="p2-panel-process" aria-labelledby="p2-tab-process" class="tab-panel fade" hidden>
+                  <ul>
+                    <li>벤치마킹 및 카드소팅</li>
+                    <li>프로토타입 테스트와 반복 개선</li>
+                  </ul>
+                </div>
+                <div tabindex="0" role="tabpanel" id="p2-panel-outcome" aria-labelledby="p2-tab-outcome" class="tab-panel fade" hidden>
+                  <p>탐색 완료 시간 -15% 목표, 클릭 정확도 +10% 목표.</p>
+                </div>
+              </div>
+            </article>
+
+            <!-- Project 3 -->
+            <article class="project-card reveal" data-tags="Research,Strategy" aria-labelledby="p3-title">
+              <header class="project-header">
+                <h3 id="p3-title" class="project-title">AI와 친해져요: 학습 경험 설계</h3>
+                <div class="project-meta">
+                  <span class="tag">Research</span>
+                  <span class="tag">Strategy</span>
+                </div>
+                <button class="accordion-toggle" aria-expanded="false" aria-controls="p3-content">상세 보기</button>
+              </header>
+
+              <div id="p3-content" class="accordion-content" hidden>
+                <div class="tabs" role="tablist" aria-label="AI와 친해져요 상세">
+                  <button role="tab" aria-selected="true" aria-controls="p3-panel-overview" id="p3-tab-overview" class="tab">Overview</button>
+                  <button role="tab" aria-selected="false" aria-controls="p3-panel-process" id="p3-tab-process" class="tab">Process</button>
+                  <button role="tab" aria-selected="false" aria-controls="p3-panel-outcome" id="p3-tab-outcome" class="tab">Outcome</button>
+                </div>
+                <div tabindex="0" role="tabpanel" id="p3-panel-overview" aria-labelledby="p3-tab-overview" class="tab-panel fade in">
+                  <p>생성형 AI의 첫 경험을 안전하고 흥미롭게 만드는 콘텐츠 아키텍처.</p>
+                  <a class="ext-link" href="https://drive.google.com/file/d/1-8tN_ztfFAOCJkj43-vFxVHp65qSSkmK/view" target="_blank" rel="noopener noreferrer">Drive 보기</a>
+                </div>
+                <div tabindex="0" role="tabpanel" id="p3-panel-process" aria-labelledby="p3-tab-process" class="tab-panel fade" hidden>
+                  <ul>
+                    <li>학습자 여정 정의 및 난이도 곡선 설계</li>
+                    <li>콘텐츠 모듈화와 반복 테스트</li>
+                  </ul>
+                </div>
+                <div tabindex="0" role="tabpanel" id="p3-panel-outcome" aria-labelledby="p3-tab-outcome" class="tab-panel fade" hidden>
+                  <p>초보자 이탈률 -20% 목표, 자기효능감 지표 +15% 목표.</p>
+                </div>
+              </div>
+            </article>
+
+            <!-- Project 4 -->
+            <article class="project-card reveal" data-tags="UX,Experiment" aria-labelledby="p4-title">
+              <header class="project-header">
+                <h3 id="p4-title" class="project-title">알파미니 기반 프로젝트</h3>
+                <div class="project-meta">
+                  <span class="tag">UX</span>
+                  <span class="tag">Experiment</span>
+                </div>
+                <button class="accordion-toggle" aria-expanded="false" aria-controls="p4-content">상세 보기</button>
+              </header>
+
+              <div id="p4-content" class="accordion-content" hidden>
+                <div class="tabs" role="tablist" aria-label="알파미니 상세">
+                  <button role="tab" aria-selected="true" aria-controls="p4-panel-overview" id="p4-tab-overview" class="tab">Overview</button>
+                  <button role="tab" aria-selected="false" aria-controls="p4-panel-process" id="p4-tab-process" class="tab">Process</button>
+                  <button role="tab" aria-selected="false" aria-controls="p4-panel-outcome" id="p4-tab-outcome" class="tab">Outcome</button>
+                </div>
+                <div tabindex="0" role="tabpanel" id="p4-panel-overview" aria-labelledby="p4-tab-overview" class="tab-panel fade in">
+                  <p>소셜 로봇과 상호작용 설계를 통한 몰입도 향상 실험.</p>
+                  <a class="ext-link" href="https://drive.google.com/file/d/1WobASMsa-ZXrfrlzp7s3rCLpd0ht642X/view" target="_blank" rel="noopener noreferrer">Drive 보기</a>
+                </div>
+                <div tabindex="0" role="tabpanel" id="p4-panel-process" aria-labelledby="p4-tab-process" class="tab-panel fade" hidden>
+                  <ul>
+                    <li>행동 데이터 수집 및 분석</li>
+                    <li>상호작용 스크립트 실험</li>
+                  </ul>
+                </div>
+                <div tabindex="0" role="tabpanel" id="p4-panel-outcome" aria-labelledby="p4-tab-outcome" class="tab-panel fade" hidden>
+                  <p>참여 유지시간 +22% 목표, 긍정 피드백 비율 +14% 목표.</p>
+                </div>
+              </div>
+            </article>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Statement: 자기소개서 카드형 본문 -->
+    <section id="statement" class="section statement" aria-labelledby="st-title">
+      <div class="container">
+        <h2 id="st-title" class="section-title">Statement</h2>
+        <article class="statement-card reveal" tabindex="0">
+          <p>
+            저는 문제를 단순화하고 핵심 가치를 빠르게 드러내는 설계를 지향합니다. 모호함을 구조화하고,
+            팀이 동일한 방향을 바라보도록 돕습니다. 사용자와 비즈니스가 동시에 만족하는 지점을 찾는 일에
+            가장 큰 동기를 느낍니다.
+          </p>
+          <p>
+            데이터에 기반한 실험과 학습, 그리고 명확한 문서화를 통해 팀 속도를 높입니다. 실행 가능한 설계와
+            검증 가능한 목표를 제시하여 리스크를 줄이고 성장의 단서를 만듭니다.
+          </p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-inner">
+      <span>© <span id="year"></span> Seoyeon Lee</span>
+      <span aria-live="polite">Visible projects: <strong id="visibleCount">0</strong></span>
+    </div>
+  </footer>
+
+  <!-- 맨 위로 버튼 -->
+  <button id="toTop" class="to-top" type="button" aria-label="맨 위로 이동" hidden>↑</button>
+
+  <script src="./script.js" defer></script>
+</body>
+</html>
+
+
+
